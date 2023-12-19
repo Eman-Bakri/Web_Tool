@@ -1,0 +1,142 @@
+
+:root {
+    --grey-color: #7f8c8d;
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+  .sidebar {
+      max-width:200px;
+      background:#eae6f5;
+      padding:10px 20px 20px 20px;
+      /*margin: 0px 5px 5px 0px;*/
+      border:1px solid #111;
+      border-radius:4px;
+      box-shadow:0px 4px 5px rgba(0, 0, 0, 0.75);
+      text-decoration: #eae6f5;
+  }
+  a {
+    text-decoration: none;
+  }
+  .radio_sidebar{
+    display: inline-flex;
+    flex-flow: row;
+  }
+  section > div .radio_sidebar{
+    flex: 1;
+    padding: 0.5rem;
+  }
+  input[type="radio"] {
+    display: none;
+    &:not(:disabled) ~ label {
+      cursor: pointer;
+    }
+    &:disabled ~ label {
+      color: hsla(150, 5%, 75%, 1);
+      border-color: hsla(150, 5%, 75%, 1);
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+  }
+  label {
+    height: 100%;
+    display: block;
+    background: white;
+    border: 2px solid #4b208ca9;
+    border-radius: 20px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    /*margin: 1rem;*/
+    text-align: center;
+    box-shadow: 0px 3px 10px -2px hsla(150, 5%, 65%, 0.5);
+    position: relative;
+  }
+  input[type="radio"]:checked + label {
+    background: #4b208c;
+    color: hsla(215, 0%, 100%, 1);
+    box-shadow: 0px 0px 20px #4b208ca9;
+    &::after {
+      color: hsla(215, 5%, 25%, 1);
+      font-family: "Poppins", sans-serif;
+      border: 2px solid #4b208ca9;
+      content: "\f00c";
+      font-size: 24px;
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 50px;
+      width: 50px;
+      line-height: 50px;
+      text-align: center;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0px 2px 5px -2px hsla(0, 0%, 0%, 0.25);
+    }
+  }
+  p {
+    font-weight: 70;
+    text-align: justify;
+  }
+  
+  @media only screen and (max-width: 700px) {
+    section {
+      flex-direction: column;
+    }
+  }  
+  $menu-link-active-colors: var(--primary-color), var(--info-color),
+    var(--success-color), var(--warning-color), var(--danger-color);
+  
+  .menu-hover-fill {
+    li {
+      position: relative;
+  
+      &::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: -1rem;
+        width: 0.25rem;
+        height: 100%;
+        background: var(--menu-link-active-color);
+        transition: 0.6s;
+      }
+  
+      a {
+        --menu-link-color: var(--grey-color);
+        position: relative;
+        background: linear-gradient(var(--menu-link-active-color) 0 100%) left / 0
+          no-repeat;
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+        transition: background-size 0.45s 0.04s;
+  
+        &::before {
+          position: absolute;
+          content: attr(data-text);
+          z-index: -1;
+          color: var(--menu-link-color);
+        }
+      }
+  
+      @for $i from 1 through length($menu-link-active-colors) {
+        &:nth-child(#{$i}) {
+          --menu-link-active-color: #{nth($menu-link-active-colors, $i)};
+        }
+      }
+  
+      &:hover {
+        &::before {
+          left: calc(100% + 1rem);
+        }
+  
+        a {
+          background-size: 100%;
+        }
+      }
+    }
+  }
+  
